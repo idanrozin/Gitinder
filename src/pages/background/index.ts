@@ -9,15 +9,13 @@ reloadOnUpdate("pages/background");
  */
 reloadOnUpdate("pages/content/style.scss");
 
-// console.log("background loaded Rozin");
-
 chrome.action.onClicked.addListener(() => {
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     chrome.tabs.sendMessage(
       tabs[0].id,
       { action: MESSAGE_SET_LAYOUT_ACTIVE },
       function (response) {
-        console.log(response);
+        // console.log(response);
       }
     );
   });

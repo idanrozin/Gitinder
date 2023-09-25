@@ -35,7 +35,7 @@ export default function App() {
       }
     };
 
-    console.log("content view loaded");
+    // console.log("content view loaded");
     document.addEventListener("keydown", handleEsc);
 
     chrome.runtime.onMessage.addListener(activate);

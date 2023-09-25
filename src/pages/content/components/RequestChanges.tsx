@@ -15,7 +15,6 @@ export default function RequestChanges({
   ) => {
     event?.preventDefault();
     const text = textAreaRef.current?.value;
-    console.log(text);
     onRequestChanges(false, text);
   };
 

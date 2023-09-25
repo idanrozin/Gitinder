@@ -36,7 +36,6 @@ const DraggableDiv = ({
         handleMouseUp();
         setDirection(null);
         if (newOffsetX > 350) {
-          console.log("approve :>> ");
           onLeftOrRightSlide(true);
         } else {
           setIsRequestChanges(true);

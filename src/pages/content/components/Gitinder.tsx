@@ -21,7 +21,6 @@ export default function Gitinder({
 
   function closeLayout(e: React.MouseEvent<HTMLDivElement>) {
     if (dragging) return;
-    console.log("e.target :>> ", e.target);
     if (e.target !== e.currentTarget) return;
     setIsLayoutActive("inactive");
   }
