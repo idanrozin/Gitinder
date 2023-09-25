@@ -37,9 +37,17 @@ export async function githubApproveOrReject(isApprove: boolean, text?: string) {
       (commentTextArea as HTMLTextAreaElement).value = text;
     }
   }
-  // (
-  //   document.querySelector(
-  //     "button[form=pull_requests_submit_review]"
-  //   ) as HTMLElement
-  // ).click();
+
+  const form = document.querySelector("form#pull_requests_submit_review");
+  if (!form) return;
+  (form.querySelector("button[type=submit]") as HTMLElement)?.click();
+}
+
+export function getPRName() {
+  return document
+    .querySelector(".gh-header-title")
+    ?.textContent.split("\n")
+    ?.map((t) => t.trim())
+    ?.filter(Boolean)
+    ?.join("; ");
 }
