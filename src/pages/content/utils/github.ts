@@ -1,0 +1,45 @@
+import { waitForElement } from "./contentUtils";
+
+export async function githubApproveOrReject(isApprove: boolean, text?: string) {
+  const tabCounter = document.querySelector("span#files_tab_counter");
+  if (!tabCounter) return;
+  const REVIEW_CHANGES_BTN_SELECTOR = ".js-reviews-toggle";
+
+  const filesChangeTab = tabCounter.parentElement;
+  let reviewChangesBtn: HTMLElement | null = null;
+  // check if files has "selected" class
+  if (!filesChangeTab.classList.contains("selected")) {
+    filesChangeTab.click();
+    reviewChangesBtn = (await waitForElement(
+      REVIEW_CHANGES_BTN_SELECTOR
+    )) as HTMLElement;
+  } else {
+    reviewChangesBtn = document.querySelector(
+      REVIEW_CHANGES_BTN_SELECTOR
+    ) as HTMLElement;
+  }
+
+  if (!reviewChangesBtn) return;
+
+  (reviewChangesBtn as HTMLElement).click();
+  const radioInputValue = isApprove ? "approve" : "reject";
+  (
+    document.querySelector(
+      `input[type=radio][value=${radioInputValue}]`
+    ) as HTMLElement
+  )?.click();
+
+  if (text) {
+    const commentTextArea = document.querySelector(
+      'textarea[name="pull_request_review[body]"]'
+    );
+    if (commentTextArea) {
+      (commentTextArea as HTMLTextAreaElement).value = text;
+    }
+  }
+  // (
+  //   document.querySelector(
+  //     "button[form=pull_requests_submit_review]"
+  //   ) as HTMLElement
+  // ).click();
+}
